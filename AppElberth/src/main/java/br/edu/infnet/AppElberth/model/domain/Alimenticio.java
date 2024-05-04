@@ -4,6 +4,15 @@ public class Alimenticio extends Produto {
 
 	private boolean organico;
 	private String carateristica;
+	
+	@Override
+	public String toString() {
+		return String.format("%s - %s - %s", 
+				super.toString(), 
+				organico, 
+				carateristica
+			);
+	}
 
 	public boolean isOrganico() {
 		return organico;

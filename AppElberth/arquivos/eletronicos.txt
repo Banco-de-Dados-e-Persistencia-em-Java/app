@@ -1,0 +1,3 @@
+telefone;456;950;true;sony;36
+tv;567;3500;true;philco;120
+notebook;678;4500;false;dell;48

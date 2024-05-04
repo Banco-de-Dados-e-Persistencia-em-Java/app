@@ -1,0 +1,8 @@
+a;pizza;123;50;true;false;frango com frango
+A;churrasco;234;75;true;false;carne, toscana, frango, farora, fritas
+z;tv;567;3500;true;philco;120
+A;jaca frita;345;15;false;true;só jaca mesmo
+E;telefone;456;950;true;sony;36
+e;tv;567;3500;true;philco;120
+E;notebook;678;4500;false;dell;48
+z;tv;567;3500;true;philco;120

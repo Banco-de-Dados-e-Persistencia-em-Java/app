@@ -5,6 +5,15 @@ public class Eletronico extends Produto {
 	private String marca;
 	private int garantiaMeses;
 
+	@Override
+	public String toString() {
+		return String.format("%s - %s - %d", 
+				super.toString(), 
+				marca, 
+				garantiaMeses
+			);
+	}
+
 	public String getMarca() {
 		return marca;
 	}

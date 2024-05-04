@@ -4,11 +4,30 @@ import java.util.List;
 
 public class Vendedor {
 	
+	private Integer id;
 	private String nome;
 	private String cpf;
 	private String email;
 	
 	private List<Produto> produtos;
+	
+	@Override
+	public String toString() {
+		return String.format("%d - %s - %s - %s",
+				id,
+				nome, 
+				cpf, 
+				email
+			);
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
 	public String getNome() {
 		return nome;
