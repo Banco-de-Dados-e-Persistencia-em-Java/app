@@ -1,5 +1,6 @@
 package br.edu.infnet.AppElberth.model.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Vendedor {
@@ -11,13 +12,18 @@ public class Vendedor {
 	
 	private List<Produto> produtos;
 	
+	public Vendedor() {
+		this.produtos = new ArrayList<Produto>();
+	}
+	
 	@Override
 	public String toString() {
-		return String.format("%d - %s - %s - %s",
+		return String.format("%d - %s - %s - %s - %d",
 				id,
 				nome, 
 				cpf, 
-				email
+				email,
+				produtos.size()
 			);
 	}
 
