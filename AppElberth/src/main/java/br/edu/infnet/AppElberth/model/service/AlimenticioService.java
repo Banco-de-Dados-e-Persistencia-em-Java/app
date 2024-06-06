@@ -1,33 +1,36 @@
 package br.edu.infnet.AppElberth.model.service;
 
 import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.edu.infnet.AppElberth.model.domain.Alimenticio;
+import br.edu.infnet.AppElberth.model.repository.AlimenticioRepository;
 
 @Service
 public class AlimenticioService {
 
-	private static Map<Integer, Alimenticio> mapa = new HashMap<Integer, Alimenticio>();
-	private static Integer id = 0;
-
+	@Autowired
+	private AlimenticioRepository alimenticioRepository;
+	
 	public void incluir(Alimenticio alimenticio){
-		alimenticio.setId(++id);
-		mapa.put(alimenticio.getId(), alimenticio);
+		alimenticioRepository.save(alimenticio);
 	}
 
 	public Collection<Alimenticio> obterLista(){
-		return mapa.values();
+		return (Collection<Alimenticio>) alimenticioRepository.findAll();
 	}
 
 	public Alimenticio obterPorId(Integer id) {
-		return mapa.get(id);
+		return alimenticioRepository.findById(id).orElse(null);
 	}
 
 	public void excluir(Integer id) {
-		mapa.remove(id);
+		alimenticioRepository.deleteById(id);
+	}
+	
+	public long obterQtde() {
+		return alimenticioRepository.count();
 	}
 }

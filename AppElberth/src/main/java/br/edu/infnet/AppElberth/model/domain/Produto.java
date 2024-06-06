@@ -1,12 +1,31 @@
 package br.edu.infnet.AppElberth.model.domain;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+
+@Entity
+@Table(name = "TProduto")
+@Inheritance(strategy = InheritanceType.JOINED)
 public abstract class Produto {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String descricao;
 	private int codigo;
 	private float preco;
 	private boolean estoque;
+	@ManyToOne
+	@JoinColumn(name = "idVendedor")
+	private Vendedor vendedor;
 	
 	@Override
 	public String toString() {
@@ -57,5 +76,13 @@ public abstract class Produto {
 
 	public void setEstoque(boolean estoque) {
 		this.estoque = estoque;
+	}
+
+	public Vendedor getVendedor() {
+		return vendedor;
+	}
+
+	public void setVendedor(Vendedor vendedor) {
+		this.vendedor = vendedor;
 	}
 }

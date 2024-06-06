@@ -6,11 +6,14 @@ import java.io.FileReader;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 import br.edu.infnet.AppElberth.model.domain.Alimenticio;
+import br.edu.infnet.AppElberth.model.domain.Vendedor;
 import br.edu.infnet.AppElberth.model.service.AlimenticioService;
 
+@Order(2)
 @Component
 public class AlimenticioLoader implements ApplicationRunner {
 	
@@ -39,6 +42,8 @@ public class AlimenticioLoader implements ApplicationRunner {
 			alimenticio.setEstoque(Boolean.valueOf(campos[3]));
 			alimenticio.setOrganico(Boolean.valueOf(campos[4]));
 			alimenticio.setCarateristica(campos[5]);
+			
+			alimenticio.setVendedor(new Vendedor(Integer.valueOf(campos[6])));
 			
 			alimenticioService.incluir(alimenticio);
 			

@@ -3,19 +3,39 @@ package br.edu.infnet.AppElberth.model.domain;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "TVendedor")
 public class Vendedor {
 	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String nome;
 	private String cpf;
 	private String email;
-	
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE, orphanRemoval = true)
+	@JoinColumn(name = "idVendedor")
 	private List<Produto> produtos;
 	
 	public Vendedor() {
 		this.produtos = new ArrayList<Produto>();
 	}
 	
+	public Vendedor(Integer id) {
+		this();
+		this.setId(id);
+	}
+
 	@Override
 	public String toString() {
 		return String.format("%d - %s - %s - %s - %d",

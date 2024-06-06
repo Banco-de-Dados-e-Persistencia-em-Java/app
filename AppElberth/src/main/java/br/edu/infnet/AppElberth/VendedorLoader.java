@@ -7,18 +7,26 @@ import java.util.Arrays;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 import br.edu.infnet.AppElberth.model.domain.Alimenticio;
 import br.edu.infnet.AppElberth.model.domain.Eletronico;
 import br.edu.infnet.AppElberth.model.domain.Vendedor;
+import br.edu.infnet.AppElberth.model.service.AlimenticioService;
+import br.edu.infnet.AppElberth.model.service.EletronicoService;
 import br.edu.infnet.AppElberth.model.service.VendedorService;
 
+@Order(1)
 @Component
 public class VendedorLoader implements ApplicationRunner {
 	
 	@Autowired
 	private VendedorService vendedorService;
+	@Autowired
+	private AlimenticioService alimenticioService;
+	@Autowired
+	private EletronicoService eletronicoService;
 
 	@Override
 	public void run(ApplicationArguments args) throws Exception {
@@ -56,6 +64,10 @@ public class VendedorLoader implements ApplicationRunner {
 				alimenticio.setOrganico(Boolean.valueOf(campos[5]));
 				alimenticio.setCarateristica(campos[6]);
 				
+				alimenticio.setVendedor(vendedor);
+				
+				alimenticioService.incluir(alimenticio);
+				
 				vendedor.getProdutos().add(alimenticio);
 
 				break;
@@ -68,6 +80,10 @@ public class VendedorLoader implements ApplicationRunner {
 				eletronico.setEstoque(Boolean.valueOf(campos[4]));
 				eletronico.setMarca(campos[5]);
 				eletronico.setGarantiaMeses(Integer.valueOf(campos[6]));
+				
+				eletronico.setVendedor(vendedor);
+				
+				eletronicoService.incluir(eletronico);
 
 				vendedor.getProdutos().add(eletronico);
 				

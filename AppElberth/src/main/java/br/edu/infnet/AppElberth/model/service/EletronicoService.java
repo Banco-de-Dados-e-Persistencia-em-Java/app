@@ -1,33 +1,36 @@
 package br.edu.infnet.AppElberth.model.service;
 
 import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.edu.infnet.AppElberth.model.domain.Eletronico;
+import br.edu.infnet.AppElberth.model.repository.EletronicoRepository;
 
 @Service
 public class EletronicoService {
 
-	private static Map<Integer, Eletronico> mapa = new HashMap<Integer, Eletronico>();
-	private static Integer id = 0;
-
+	@Autowired
+	private EletronicoRepository eletronicoRepository;
+	
 	public void incluir(Eletronico eletronico){
-		eletronico.setId(++id);
-		mapa.put(eletronico.getId(), eletronico);
+		eletronicoRepository.save(eletronico);
 	}
 
 	public Collection<Eletronico> obterLista(){
-		return mapa.values();
+		return (Collection<Eletronico>) eletronicoRepository.findAll();
 	}
 
 	public Eletronico obterPorId(Integer id) {
-		return mapa.get(id);
+		return eletronicoRepository.findById(id).orElse(null);
 	}
 
 	public void excluir(Integer id) {
-		mapa.remove(id);
+		eletronicoRepository.deleteById(id);
+	}
+	
+	public long obterQtde() {
+		return eletronicoRepository.count();
 	}
 }

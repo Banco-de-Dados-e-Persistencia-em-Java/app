@@ -6,11 +6,14 @@ import java.io.FileReader;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 import br.edu.infnet.AppElberth.model.domain.Eletronico;
+import br.edu.infnet.AppElberth.model.domain.Vendedor;
 import br.edu.infnet.AppElberth.model.service.EletronicoService;
 
+@Order(3)
 @Component
 public class EletronicoLoader implements ApplicationRunner {
 	
@@ -40,6 +43,8 @@ public class EletronicoLoader implements ApplicationRunner {
 			eletronico.setMarca(campos[4]);
 			eletronico.setGarantiaMeses(Integer.valueOf(campos[5]));
 			
+			eletronico.setVendedor(new Vendedor(Integer.valueOf(campos[6])));
+						
 			eletronicoService.incluir(eletronico);
 			
 			linha = leitura.readLine();
