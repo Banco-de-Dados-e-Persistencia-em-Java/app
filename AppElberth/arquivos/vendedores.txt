@@ -1,11 +1,11 @@
 V;elberth;12345678912345;elberth@elberth.com
 a;pizza;123;50;true;false;frango com frango
-A;churrasco;234;75;true;false;carne, toscana, frango, farora, fritas
-z;tv;567;3500;true;philco;120
+A;churrasco;234;75;true;false;carne, toscana
+z;tv;567;3500;true;philco;20
 v;maria;98765432154;maria@maria.com
 A;jaca frita;345;15;false;true;só jaca mesmo
-E;telefone;456;950;true;sony;36
+E;telefone;456;950;true;meu 2 sony;30
 V;elis;65498731221;elis@elis.com
-e;tv;567;3500;true;philco;120
-E;notebook;678;4500;false;dell;48
-z;tv;567;3500;true;philco;120
+e;tv;567;3500;true;meu 1 sony;20
+E;notebook;678;4500;false;dell;28
+z;tv;567;3500;true;philco;20

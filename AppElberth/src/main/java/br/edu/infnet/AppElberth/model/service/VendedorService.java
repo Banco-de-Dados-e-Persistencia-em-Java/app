@@ -14,8 +14,12 @@ public class VendedorService {
 	@Autowired
 	private VendedorRepository vendedorRepository;
 
-	public void incluir(Vendedor vendedor){		
-		vendedorRepository.save(vendedor);
+	public void incluir(Vendedor vendedor){				
+		try {
+			vendedorRepository.save(vendedor);
+		} catch (Exception e) {
+			System.err.println("[ERROR] " + e.getMessage());
+		}		
 	}
 
 	public Collection<Vendedor> obterLista(){
@@ -33,4 +37,9 @@ public class VendedorService {
 	public long obterQtde() {
 		return vendedorRepository.count();
 	}
+	
+	public Vendedor obterPorCPF(String cpf) {
+		return vendedorRepository.findByCpf(cpf);
+	}
+	
 }

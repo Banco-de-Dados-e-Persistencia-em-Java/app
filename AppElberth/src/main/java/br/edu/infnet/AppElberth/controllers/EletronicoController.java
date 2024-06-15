@@ -38,4 +38,9 @@ public class EletronicoController {
 	public void excluir(@PathVariable Integer id) {
 		eletronicoService.excluir(id);
 	}
+
+	@GetMapping(value = "/eletronico/lista/{marca}")
+	public Collection<Eletronico> obterListaMarca(@PathVariable String marca){
+		return eletronicoService.obterListaPorMarca(marca);
+	}
 }

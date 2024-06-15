@@ -15,7 +15,11 @@ public class ProdutoService {
 	private ProdutoRepository produtoRepository;
 	
 	public void incluir(Produto produto){
-		produtoRepository.save(produto);
+		try {
+			produtoRepository.save(produto);
+		} catch (Exception e) {
+			System.err.println("[ERROR] " + e.getMessage());
+		}
 	}
 
 	public Collection<Produto> obterLista(){
@@ -32,5 +36,13 @@ public class ProdutoService {
 	
 	public long obterQtde() {
 		return produtoRepository.count();
+	}
+	
+	public Produto obterPorCodigo(int codigo){
+		return produtoRepository.findByCodigo(codigo);
+	}
+
+	public Collection<Produto> obterListaPorVendedor(Integer id){
+		return (Collection<Produto>) produtoRepository.findByVendedorId(id);
 	}
 }

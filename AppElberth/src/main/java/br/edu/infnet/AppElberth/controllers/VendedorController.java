@@ -38,4 +38,9 @@ public class VendedorController {
 	public void excluir(@PathVariable Integer id) {
 		vendedorService.excluir(id);
 	}
+
+	@GetMapping(value =  "/vendedor/{cpf}/cpf")
+	public Vendedor obterPorCPF(@PathVariable String cpf) {
+		return vendedorService.obterPorCPF(cpf);
+	}
 }

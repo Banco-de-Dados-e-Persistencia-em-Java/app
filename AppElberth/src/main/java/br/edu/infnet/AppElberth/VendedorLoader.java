@@ -103,6 +103,7 @@ public class VendedorLoader implements ApplicationRunner {
 			System.out.println(oVendedor);			
 		}
 		System.out.println("Processamento realizado com sucesso!");
+		
 
 		leitura.close();
 	}

@@ -15,7 +15,11 @@ public class EletronicoService {
 	private EletronicoRepository eletronicoRepository;
 	
 	public void incluir(Eletronico eletronico){
-		eletronicoRepository.save(eletronico);
+		try {
+			eletronicoRepository.save(eletronico);
+		} catch (Exception e) {
+			System.err.println("[ERROR] " + e.getMessage());
+		}
 	}
 
 	public Collection<Eletronico> obterLista(){
@@ -32,5 +36,9 @@ public class EletronicoService {
 	
 	public long obterQtde() {
 		return eletronicoRepository.count();
+	}
+
+	public Collection<Eletronico> obterListaPorMarca(String marca){
+		return (Collection<Eletronico>) eletronicoRepository.findByMarcaContaining(marca);
 	}
 }

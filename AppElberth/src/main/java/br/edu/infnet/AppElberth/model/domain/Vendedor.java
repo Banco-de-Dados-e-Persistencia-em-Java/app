@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -12,6 +13,11 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name = "TVendedor")
@@ -19,12 +25,23 @@ public class Vendedor {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id;
+	private Integer id;	
+	
+	@NotBlank(message = "É necessário preencher o campo NOME!")
+	@Size(min = 3, max = 100, message = "O nome do vendedor deve ter entre {min} e {max} caracteres.")
 	private String nome;
+	
+	@NotBlank(message = "É necessário preencher o campo CPF!")
+	@Column(unique = true)
 	private String cpf;
+	
+	@NotBlank(message = "É necessário preencher o campo E-MAIL!")
+	@Email(message = "O email {email} está incorreto!")
 	private String email;
+
 	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE, orphanRemoval = true)
 	@JoinColumn(name = "idVendedor")
+	@JsonManagedReference
 	private List<Produto> produtos;
 	
 	public Vendedor() {

@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.edu.infnet.AppElberth.model.domain.Alimenticio;
@@ -20,8 +21,8 @@ public class AlimenticioController {
 	private AlimenticioService alimenticioService;
 	
 	@GetMapping(value = "/alimenticio/lista")
-	public Collection<Alimenticio> obterLista(){
-		return alimenticioService.obterLista();
+	public Collection<Alimenticio> obterLista(@RequestParam String orderBy){
+		return alimenticioService.obterLista(orderBy);
 	}
 	
 	@GetMapping(value =  "/alimenticio/{id}")
@@ -37,5 +38,10 @@ public class AlimenticioController {
 	@DeleteMapping(value = "/alimenticio/{id}/excluir")
 	public void excluir(@PathVariable Integer id) {
 		alimenticioService.excluir(id);
+	}
+
+	@GetMapping(value = "/alimenticio/lista/{organico}")
+	public Collection<Alimenticio> obterListaOrganico(@PathVariable boolean organico){
+		return alimenticioService.obterListaOrganico(organico);
 	}
 }
