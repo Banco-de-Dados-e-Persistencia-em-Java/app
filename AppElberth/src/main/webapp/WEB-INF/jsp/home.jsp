@@ -19,18 +19,22 @@
 				<li class="nav-item"><a class="nav-link" href="/produto/listagem">Produtos</a></li>
 				<li class="nav-item"><a class="nav-link" href="/alimenticio/listagem">Alimentícios</a></li>
 				<li class="nav-item"><a class="nav-link" href="/eletronico/listagem">Eletrônicos</a></li>
+				<li class="nav-item"><a class="nav-link" href="/endereco/listagem">Endereços</a></li>
+
+				<li class="nav-item"><a class="nav-link" href="/estado/listagem">Estados</a></li>
+				<li class="nav-item"><a class="nav-link" href="/api/listagem">API</a></li>
 			</ul>
 		</div>
 	</nav>
 
 	<div class="container mt-3">
 
-		<span class="badge rounded-pill bg-primary">Vendedor:
-			${qtdeVendedor}</span> <span class="badge rounded-pill bg-secondary">Produto:
-			${qtdeProduto}</span> <span class="badge rounded-pill bg-success">Alimentício:
-			${qtdeAlimenticio}</span> <span class="badge rounded-pill bg-danger">Eletrônico:
-			${qtdeEletronico}</span>
-
+		<span class="badge rounded-pill bg-primary">Vendedor:${qtdeVendedor}</span> 
+		<span class="badge rounded-pill bg-secondary">Produto:${qtdeProduto}</span> 
+		<span class="badge rounded-pill bg-success">Alimentício:${qtdeAlimenticio}</span> 
+		<span class="badge rounded-pill bg-danger">Eletrônico:${qtdeEletronico}</span>
+		<span class="badge rounded-pill bg-warning">Endereço:${qtdeEndereco}</span>
+		
 		<c:if test="${not empty listagem}">
 			<h2>AppVenda</h2>
 			<p>Gestão de vendas de produtos:</p>

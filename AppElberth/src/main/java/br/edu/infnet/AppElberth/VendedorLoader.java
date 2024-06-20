@@ -12,9 +12,11 @@ import org.springframework.stereotype.Component;
 
 import br.edu.infnet.AppElberth.model.domain.Alimenticio;
 import br.edu.infnet.AppElberth.model.domain.Eletronico;
+import br.edu.infnet.AppElberth.model.domain.Endereco;
 import br.edu.infnet.AppElberth.model.domain.Vendedor;
 import br.edu.infnet.AppElberth.model.service.AlimenticioService;
 import br.edu.infnet.AppElberth.model.service.EletronicoService;
+import br.edu.infnet.AppElberth.model.service.EnderecoService;
 import br.edu.infnet.AppElberth.model.service.VendedorService;
 
 @Order(1)
@@ -27,6 +29,8 @@ public class VendedorLoader implements ApplicationRunner {
 	private AlimenticioService alimenticioService;
 	@Autowired
 	private EletronicoService eletronicoService;
+	@Autowired
+	private EnderecoService enderecoService;
 
 	@Override
 	public void run(ApplicationArguments args) throws Exception {
@@ -47,11 +51,15 @@ public class VendedorLoader implements ApplicationRunner {
 			
 			switch (campos[0].toUpperCase()) {
 			case "V":
+				
+				Endereco endereco = enderecoService.obterPorCep(campos[4]);
+								
 				vendedor = new Vendedor();
 				vendedor.setNome(campos[1]);
 				vendedor.setCpf(campos[2]);
 				vendedor.setEmail(campos[3]);
-			
+				vendedor.setEndereco(endereco);
+				
 				vendedorService.incluir(vendedor);
 				break;
 				

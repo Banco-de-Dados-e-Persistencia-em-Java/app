@@ -12,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
@@ -44,6 +45,10 @@ public class Vendedor {
 	@JsonManagedReference
 	private List<Produto> produtos;
 	
+	@OneToOne(cascade = CascadeType.PERSIST)
+	@JoinColumn(name = "idEndereco")
+	private Endereco endereco;
+	
 	public Vendedor() {
 		this.produtos = new ArrayList<Produto>();
 	}
@@ -55,12 +60,13 @@ public class Vendedor {
 
 	@Override
 	public String toString() {
-		return String.format("%d - %s - %s - %s - %d",
+		return String.format("%d - %s - %s - %s - %d - Endereço: %s",
 				id,
 				nome, 
 				cpf, 
 				email,
-				produtos.size()
+				produtos.size(),
+				endereco
 			);
 	}
 
@@ -102,5 +108,13 @@ public class Vendedor {
 
 	public void setProdutos(List<Produto> produtos) {
 		this.produtos = produtos;
+	}
+
+	public Endereco getEndereco() {
+		return endereco;
+	}
+
+	public void setEndereco(Endereco endereco) {
+		this.endereco = endereco;
 	}
 }

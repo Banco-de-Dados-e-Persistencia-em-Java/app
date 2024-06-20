@@ -6,7 +6,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import br.edu.infnet.AppElberth.model.service.AlimenticioService;
+import br.edu.infnet.AppElberth.model.service.ApiService;
 import br.edu.infnet.AppElberth.model.service.EletronicoService;
+import br.edu.infnet.AppElberth.model.service.EnderecoService;
+import br.edu.infnet.AppElberth.model.service.EstadoService;
 import br.edu.infnet.AppElberth.model.service.ProdutoService;
 import br.edu.infnet.AppElberth.model.service.VendedorService;
 
@@ -21,6 +24,12 @@ public class AppController {
 	private AlimenticioService alimenticioService;
 	@Autowired
 	private EletronicoService eletronicoService;
+	@Autowired
+	private EnderecoService enderecoService;
+	@Autowired
+	private EstadoService estadoService;
+	@Autowired
+	private ApiService apiService;
 	
 	@GetMapping(value = "/")
 	public String telaHome(Model model){
@@ -29,6 +38,7 @@ public class AppController {
 		model.addAttribute("qtdeProduto", produtoService.obterQtde());
 		model.addAttribute("qtdeAlimenticio", alimenticioService.obterQtde());
 		model.addAttribute("qtdeEletronico", eletronicoService.obterQtde());
+		model.addAttribute("qtdeEndereco", enderecoService.obterQtde());
 		
 		return "home";
 	}
@@ -63,6 +73,32 @@ public class AppController {
 		
 		model.addAttribute("titulo", "Listagem de Produtos Eletrônicos");
 		model.addAttribute("listagem", eletronicoService.obterLista());
+		
+		return telaHome(model);
+	}
+	@GetMapping(value = "/endereco/listagem")
+	public String listaEnderecos(Model model){
+		
+		model.addAttribute("titulo", "Listagem de Endereços");
+		model.addAttribute("listagem", enderecoService.obterLista());
+		
+		return telaHome(model);
+	}
+
+	@GetMapping(value = "/estado/listagem")
+	public String listaEstados(Model model){
+		
+		model.addAttribute("titulo", "Listagem de Estados");
+		model.addAttribute("listagem", estadoService.obterLista());
+		
+		return telaHome(model);
+	}
+
+	@GetMapping(value = "/api/listagem")
+	public String listagem(Model model){
+		
+		model.addAttribute("titulo", "Listagem da API");
+		model.addAttribute("listagem", apiService.obterLista());
 		
 		return telaHome(model);
 	}
