@@ -1,4 +1,4 @@
-package br.edu.infnet.AppElberth.model.domain;
+package br.edu.infnet.elberthAPI.model.domain;
 
 public class Estado {
 

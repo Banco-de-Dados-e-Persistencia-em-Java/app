@@ -15,6 +15,7 @@ import br.edu.infnet.AppElberth.model.domain.Eletronico;
 import br.edu.infnet.AppElberth.model.domain.Endereco;
 import br.edu.infnet.AppElberth.model.domain.Vendedor;
 import br.edu.infnet.AppElberth.model.service.AlimenticioService;
+import br.edu.infnet.AppElberth.model.service.ApiService;
 import br.edu.infnet.AppElberth.model.service.EletronicoService;
 import br.edu.infnet.AppElberth.model.service.EnderecoService;
 import br.edu.infnet.AppElberth.model.service.VendedorService;
@@ -31,6 +32,8 @@ public class VendedorLoader implements ApplicationRunner {
 	private EletronicoService eletronicoService;
 	@Autowired
 	private EnderecoService enderecoService;
+	@Autowired
+	private ApiService apiService;
 
 	@Override
 	public void run(ApplicationArguments args) throws Exception {
@@ -52,7 +55,7 @@ public class VendedorLoader implements ApplicationRunner {
 			switch (campos[0].toUpperCase()) {
 			case "V":
 				
-				Endereco endereco = enderecoService.obterPorCep(campos[4]);
+				Endereco endereco = apiService.obterPorCep(campos[4]);
 								
 				vendedor = new Vendedor();
 				vendedor.setNome(campos[1]);

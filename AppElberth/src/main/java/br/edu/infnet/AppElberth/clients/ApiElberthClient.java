@@ -7,17 +7,18 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import br.edu.infnet.AppElberth.model.domain.Endereco;
+import br.edu.infnet.AppElberth.model.domain.Estado;
+import br.edu.infnet.AppElberth.model.domain.Municipio;
 
 @FeignClient(url = "http://localhost:8081", name = "apiElberth")
 public interface ApiElberthClient {
-
-	@GetMapping(value = "/listagem")
-	Collection<String> obterLista();
 	
 	@GetMapping(value = "/{cep}")
 	public Endereco obterEnderecoPorCep(@PathVariable String cep);	
 	
-	//estados
+	@GetMapping(value = "/estados")
+	public Collection<Estado> obterEstados();
 	
-	//municipios por estado
+	@GetMapping(value = "/{uf}/municipios")
+	public Collection<Municipio> obterMunicipios(@PathVariable Integer uf);
 }

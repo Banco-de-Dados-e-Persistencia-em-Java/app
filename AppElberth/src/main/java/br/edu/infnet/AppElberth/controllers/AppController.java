@@ -4,12 +4,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import br.edu.infnet.AppElberth.model.service.AlimenticioService;
 import br.edu.infnet.AppElberth.model.service.ApiService;
 import br.edu.infnet.AppElberth.model.service.EletronicoService;
 import br.edu.infnet.AppElberth.model.service.EnderecoService;
-import br.edu.infnet.AppElberth.model.service.EstadoService;
 import br.edu.infnet.AppElberth.model.service.ProdutoService;
 import br.edu.infnet.AppElberth.model.service.VendedorService;
 
@@ -27,8 +27,6 @@ public class AppController {
 	@Autowired
 	private EnderecoService enderecoService;
 	@Autowired
-	private EstadoService estadoService;
-	@Autowired
 	private ApiService apiService;
 	
 	@GetMapping(value = "/")
@@ -39,6 +37,9 @@ public class AppController {
 		model.addAttribute("qtdeAlimenticio", alimenticioService.obterQtde());
 		model.addAttribute("qtdeEletronico", eletronicoService.obterQtde());
 		model.addAttribute("qtdeEndereco", enderecoService.obterQtde());
+		
+		model.addAttribute("estados", apiService.obterEstados());
+		
 		
 		return "home";
 	}
@@ -60,6 +61,7 @@ public class AppController {
 		
 		return telaHome(model);
 	}
+
 	@GetMapping(value = "/alimenticio/listagem")
 	public String listaAlimenticios(Model model){
 		
@@ -68,6 +70,7 @@ public class AppController {
 		
 		return telaHome(model);
 	}
+	
 	@GetMapping(value = "/eletronico/listagem")
 	public String listaEletronicos(Model model){
 		
@@ -76,6 +79,7 @@ public class AppController {
 		
 		return telaHome(model);
 	}
+	
 	@GetMapping(value = "/endereco/listagem")
 	public String listaEnderecos(Model model){
 		
@@ -89,16 +93,16 @@ public class AppController {
 	public String listaEstados(Model model){
 		
 		model.addAttribute("titulo", "Listagem de Estados");
-		model.addAttribute("listagem", estadoService.obterLista());
+		model.addAttribute("listagem", apiService.obterEstados());
 		
 		return telaHome(model);
 	}
 
-	@GetMapping(value = "/api/listagem")
-	public String listagem(Model model){
+	@GetMapping(value = "/municipio/listagem")
+	public String listaMunicipios(Model model, @RequestParam Integer uf){
 		
-		model.addAttribute("titulo", "Listagem da API");
-		model.addAttribute("listagem", apiService.obterLista());
+		model.addAttribute("titulo", "Listagem de Municipios");
+		model.addAttribute("listagem", apiService.obterMunicipios(uf));
 		
 		return telaHome(model);
 	}
